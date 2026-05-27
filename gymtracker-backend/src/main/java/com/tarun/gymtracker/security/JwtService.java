@@ -12,8 +12,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private static final String SECRET =
-            "mysecretkeymysecretkeymysecretkey12";
+    private static final String SECRET = "mysecretkeymysecretkeymysecretkey12";
 
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
@@ -38,5 +37,10 @@ public class JwtService {
                 .getBody();
 
         return claims.getSubject();
+    }
+
+    public boolean isTokenValid(String token, String email) {
+        String extractedEmail = extractEmail(token);
+        return extractedEmail.equals(email);
     }
 }
